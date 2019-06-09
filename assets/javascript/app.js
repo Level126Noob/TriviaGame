@@ -25,6 +25,7 @@ Quiz.prototype.getQuestionIndex = function () {
 //creating a prototype function that determines if the game is over
 Quiz.prototype.isEnded = function () {
     return this.questions.length === this.questionIndex;
+
 }
 
 //creating a constructor prototype with an if statement to log the score, then go to the next question.
@@ -36,7 +37,8 @@ Quiz.prototype.guess = function (answer) {
     this.questionIndex++;
 }
 //======================================================== writing functions to work with the app interface====================================================================
-
+//making a global variable for the time left
+var counter = 60;
 //making a function to populate the page with the questions
 function populate() {
     if(quiz.isEnded()) {
@@ -46,6 +48,10 @@ function populate() {
         //show question
         var element = document.getElementById("question");
         element.innerHTML = quiz.getQuestionIndex().text;
+
+        //show time
+        var timer = document.getElementById("timer")
+        timer.innerHTML = counter;
 
         //show choices
         var choices = quiz.getQuestionIndex().choices;
@@ -58,6 +64,14 @@ function populate() {
         showProgress();
     }
 };
+
+function timeIt() {
+    counter--;
+    setTimeout(timeIt, 1000);
+    if(counter === 0) {
+        showScores();
+    }
+}
 
 //creating an onclick function that links the button clicked to the user guess variable, then seeing if the game is over calling the populate function again
 function guess(id, guess){
@@ -95,5 +109,5 @@ var questions = [
 
 //creating a object for the Quiz constructor function
 var quiz = new Quiz(questions);
-
+timeIt();
 populate();
