@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,14 +9,27 @@
     <script src="https://code.jquery.com/jquery.js"></script>
     <title>Trivia Game</title>
 </head>
+
 <body>
     <header>
         <div class="masthead">
             <h1>Trivia Game!</h1>
         </div>
     </header>
-    <div class="main"></div>
+    <div class="main">
+        <p id="question">Question Here?</p>
+        <div class="buttons">
+            <button id="btna"><span id="choice0"></span></button>
+            <button id="btnb"><span id="choice1"></span></button>
+            <button id="btnc"><span id="choice2"></span></button>
+            <button id="btnd"><span id="choice3"></span></button>
+            <footer>
+                <p id="progress">Question x of y</p>
+            </footer>
+        </div>
+    </div>
 
     <script src="assets/javascript/app.js"></script>
 </body>
+
 </html>
