@@ -40,14 +40,42 @@ Quiz.prototype.guess = function (answer) {
 //making a function to populate the page with the questions
 function populate() {
     if(quiz.isEnded()) {
-        //showScores();
+        showScores();
     }
     else {
         //show question
         var element = document.getElementById("question");
         element.innerHTML = quiz.getQuestionIndex().text;
+
+        //show choices
+        var choices = quiz.getQuestionIndex().choices;
+        //creating a for loop to cycle through the choices.length (array from questions) and putting them in the span tag of choices set on the buttons.
+        for(var i = 0; i< choices.length; i++) {
+        var element = document.getElementById("choice" + i);
+        element.innerHTML = choices[i];
+        guess('btn' + i, choices[i]);
+        }
+    }
+};
+
+//creating an onclick function that links the button clicked to the user guess variable, then seeing if the game is over calling the populate function again
+function guess(id, guess){
+    var button = document.getElementById(id);
+    button.onclick = function() {
+        quiz.guess(guess);
+        populate();
     }
 }
+
+//a function to show the score of how many you got correct
+function showScores() {
+    //creating a new html page to show results
+    var gameOverHTML = "<h1>Results</h1>"
+    gameOverHTML += "<h2 id='score'>Your score: " + quiz.score + "</h2>";
+    var element = document.getElementById("quiz");
+    element.innerHTML = gameOverHTML;
+}
+
 //creating a questions array variable that matches the constructor function layout
 var questions = [
     new Question("What year did the Cleveland Cavaliers win the NBA finals?", ["2015", "2016", "2017", "2018"], "2016"),
