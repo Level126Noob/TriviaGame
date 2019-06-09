@@ -1,0 +1,25 @@
+body {
+    background: url("../images/background.jpg")
+}
+
+.masthead {
+    width: 104%;
+    height: 70px;
+    background-color: grey;
+    border-bottom: 5px white solid;
+    text-align: center;
+    margin-top: -21px;
+    margin-left: -11px;
+    margin-right: -30px;
+}
+
+h1 {
+    padding-top: 18px;
+}
+
+.main {
+    background-color: white;
+    margin: 30px auto;
+    width: 700px;
+    height: 400px;
+}
