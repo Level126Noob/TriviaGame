@@ -27,13 +27,13 @@ Quiz.prototype.isEnded = function () {
     return this.questions.length === this.questionIndex;
 }
 
-//creating a constructor prototype
+//creating a constructor prototype with an if statement to log the score, then go to the next question.
 Quiz.prototype.guess = function (answer) {
-    this.questionIndex++;
-
-    if (this.getQuestionIndex().correctAnswer(answer)) {
+   if (this.getQuestionIndex().correctAnswer(answer)) {
         this.score++;
     }
+
+    this.questionIndex++;
 }
 //======================================================== writing functions to work with the app interface====================================================================
 
@@ -55,6 +55,7 @@ function populate() {
         element.innerHTML = choices[i];
         guess('btn' + i, choices[i]);
         }
+        showProgress();
     }
 };
 
@@ -65,7 +66,14 @@ function guess(id, guess){
         quiz.guess(guess);
         populate();
     }
-}
+};
+
+//creating a function to show the progress of how many questions you've answered to how many you have left.
+function showProgress() {
+    var currentQuestionNumber = quiz.questionIndex + 1;
+    var element = document.getElementById("progress");
+    element.innerHTML = "Question " + currentQuestionNumber + " of " + quiz.questions.length;
+};
 
 //a function to show the score of how many you got correct
 function showScores() {
@@ -74,13 +82,13 @@ function showScores() {
     gameOverHTML += "<h2 id='score'>Your score: " + quiz.score + "</h2>";
     var element = document.getElementById("quiz");
     element.innerHTML = gameOverHTML;
-}
+};
 
 //creating a questions array variable that matches the constructor function layout
 var questions = [
     new Question("What year did the Cleveland Cavaliers win the NBA finals?", ["2015", "2016", "2017", "2018"], "2016"),
     new Question("What year did the American Civil War End?", ["1852", "1878", "1843", "1865"], "1865"),
-    new Question("Is Puerto Rico is a part of the United States?", ["true", "false"], "false"),
+    new Question("When Luigi from Mario Brothers isn't fighting bad guys, what occupation does he hold?", ["plumber", "mechanic", "none", "musician"], "mechanic"),
     new Question("What is the element for Iron?", ["Fe", "Se", "F", "De"], "Fe"),
     new Question("How many hours are in a year?", ["365", "1870", "8760", "8500"], "8760")
 ];
