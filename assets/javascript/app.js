@@ -1,4 +1,4 @@
-//creating a constructor function to define the questions
+//creating a constructor function to define the way the questions
 function Question(text, choices, answer) {
     this.text = text;
     this.choices = choices;
@@ -37,8 +37,6 @@ Quiz.prototype.guess = function (answer) {
     this.questionIndex++;
 }
 //======================================================== writing functions to work with the app interface====================================================================
-//making a global variable for the time left
-var counter = 60;
 //making a function to populate the page with the questions
 function populate() {
     if(quiz.isEnded()) {
@@ -49,12 +47,9 @@ function populate() {
         var element = document.getElementById("question");
         element.innerHTML = quiz.getQuestionIndex().text;
 
-        //show time
-        var timer = document.getElementById("timer")
-        timer.innerHTML = counter;
-
         //show choices
         var choices = quiz.getQuestionIndex().choices;
+
         //creating a for loop to cycle through the choices.length (array from questions) and putting them in the span tag of choices set on the buttons.
         for(var i = 0; i< choices.length; i++) {
         var element = document.getElementById("choice" + i);
@@ -65,12 +60,23 @@ function populate() {
     }
 };
 
-function timeIt() {
-    counter--;
-    setTimeout(timeIt, 1000);
-    if(counter === 0) {
-        showScores();
-    }
+function timeIt(secs, elem) {
+var element = document.getElementById(elem);
+element.innerHTML = "Seconds left: " + secs;
+
+secs--;
+var timer = setTimeout('timeIt('+secs+',"'+elem+'")', 1000);
+
+if (secs === 0){
+    showScores();
+}
+if (secs < 10){
+    document.getElementById("timer").style.color = "red";
+    document.getElementById("btn0").style.backgroundColor = 'red';
+    document.getElementById("btn1").style.backgroundColor = 'red';
+    document.getElementById("btn2").style.backgroundColor = 'red';
+    document.getElementById("btn3").style.backgroundColor = 'red';
+}
 }
 
 //creating an onclick function that links the button clicked to the user guess variable, then seeing if the game is over calling the populate function again
@@ -109,5 +115,6 @@ var questions = [
 
 //creating a object for the Quiz constructor function
 var quiz = new Quiz(questions);
-timeIt();
+
+timeIt(60, "timer");
 populate();
