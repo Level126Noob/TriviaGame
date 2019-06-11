@@ -99,7 +99,7 @@ function showProgress() {
 function showScores() {
     //creating a new html page to show results
     var gameOverHTML = "<h1>Results</h1>"
-    gameOverHTML += "<h2 id='score'>Your score: " + quiz.score + "</h2>";
+    gameOverHTML += "<h2 id='score'>Your score: " + quiz.score + '/' + questions.length + "</h2>";
     var element = document.getElementById("quiz");
     element.innerHTML = gameOverHTML;
 };
